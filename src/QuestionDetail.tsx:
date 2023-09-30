@@ -1,0 +1,23 @@
+import React from 'react';
+
+interface Question {
+  id: number;
+  text: string;
+}
+
+interface QuestionDetailProps {
+  question: Question;
+}
+
+function QuestionDetail({ question }: QuestionDetailProps) {
+  return (
+    <div>
+      <h2>Selected Question</h2>
+      <p>{question.text}</p>
+      {/* Add UI for selecting an answer */}
+    </div>
+  );
+}
+
+export default QuestionDetail;
+

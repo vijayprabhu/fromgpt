@@ -1,0 +1,37 @@
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchQuestions } from './actions'; // Define this action
+
+interface Question {
+  id: number;
+  text: string;
+}
+
+interface QuestionsListProps {
+  questions: Question[];
+  fetchQuestions: () => void;
+}
+
+function QuestionsList({ questions, fetchQuestions }: QuestionsListProps) {
+  useEffect(() => {
+    fetchQuestions(); // Fetch questions using Redux action
+  }, [fetchQuestions]);
+
+  return (
+    <div>
+      <h1>Question List</h1>
+      <ul>
+        {questions.map((question) => (
+          <li key={question.id}>{question.text}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+const mapStateToProps = (state: { questions: Question[] }) => ({
+  questions: state.questions,
+});
+
+export default connect(mapStateToProps, { fetchQuestions })(QuestionsList);
+
